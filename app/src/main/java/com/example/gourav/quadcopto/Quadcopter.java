@@ -237,20 +237,18 @@ public class Quadcopter extends AppCompatActivity implements CvCameraViewListene
 
             double aveX = moments.get_m10() / moments.get_m00();
             double aveY = moments.get_m01() / moments.get_m00();
-            double centreX = aveX * mCameraViewWidth;
-            double centreY = (aveY + 1) / 2 * mCameraViewHeight;
-            Imgproc.circle(mRgba, new Point(centreX, centreY), 5, CONTOUR_COLOR, -1);
-            x = centreX;
-            y = centreY;
+            Imgproc.circle(mRgba, new Point(aveX, aveY), 5, CONTOUR_COLOR, -1);
+            x = aveX;
+            y = aveY;
+
             Log.i(TAG, "///////// x = " + x + " y = " + y);
-//                Log.i(TAG, "///////// Maxx = " + maxX + " MAxy = " + maxY);
-            if((x-293180) > 60000){
+            if((x-440) > 50){
                 Log.i(TAG," -----------------Move right ");
                 LeftnRight = "Move Right" ;
 
             }
             else {
-                if((x-293180) < -60000) {
+                if((x-440) < -50) {
                     Log.i(TAG, "Move left ");
                     LeftnRight = "Move Left" ;
 
@@ -261,13 +259,13 @@ public class Quadcopter extends AppCompatActivity implements CvCameraViewListene
 
                 }
             }
-            if((y-85021) > 25000){
+            if((y-190) > 40){
                 Log.i(TAG,"Move Backward");
                 UpnDown = "Move Backward" ;
 
             }
             else {
-                if((y-85021) < -25000) {
+                if((y-190) < -40) {
                     Log.i(TAG, " Move Forward ");
                     UpnDown = " Move Forward " ;
                 }
@@ -277,6 +275,7 @@ public class Quadcopter extends AppCompatActivity implements CvCameraViewListene
 
                 }
             }
+
 
         } // else ( n == 0 )
 
